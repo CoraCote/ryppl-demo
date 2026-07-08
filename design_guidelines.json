@@ -1,0 +1,206 @@
+{
+  "app_name": "RYPPL",
+  "personality": "4 Tactile / Playful LIGHT",
+  "personality_one_liner": "Energetic, tactile, and frictionless college delivery — blending vibrant yellow warmth with deep navy utility.",
+  "color": {
+    "surface": "#FFFFFF",
+    "onSurface": "#0F172A",
+    "surfaceSecondary": "#F8FAFC",
+    "onSurfaceSecondary": "#334155",
+    "surfaceTertiary": "#F1F5F9",
+    "onSurfaceTertiary": "#475569",
+    "surfaceInverse": "#0F172A",
+    "onSurfaceInverse": "#FFFFFF",
+    "brand": "#0A2342",
+    "brandPrimary": "#FFD600",
+    "onBrandPrimary": "#0A2342",
+    "brandSecondary": "#0A2342",
+    "onBrandSecondary": "#FFFFFF",
+    "brandTertiary": "#FFF4B3",
+    "onBrandTertiary": "#0A2342",
+    "success": "#10B981",
+    "onSuccess": "#FFFFFF",
+    "warning": "#F59E0B",
+    "onWarning": "#FFFFFF",
+    "error": "#EF4444",
+    "onError": "#FFFFFF",
+    "info": "#3B82F6",
+    "onInfo": "#FFFFFF",
+    "border": "#E2E8F0",
+    "borderStrong": "#CBD5E1",
+    "divider": "#F1F5F9"
+  },
+  "typography": {
+    "displayFontFamily": "Plus Jakarta Sans",
+    "textFontFamily": "Plus Jakarta Sans",
+    "scale": {
+      "sm": 12,
+      "base": 14,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24
+    }
+  },
+  "spacing": {
+    "rule": "Generous padding, clear visual modules instead of flat lists. Thumb zone prioritized.",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
+  },
+  "radius_tokens": {
+    "sm": 8,
+    "md": 16,
+    "lg": 24,
+    "pill": 999
+  },
+  "shadow_tier": "2",
+  "navigation": "bottom_tabs with role-based stack selection at root",
+  "icon_set": "Phosphor",
+  "glassmorphism": {
+    "enabled": "true",
+    "do's": [
+      "Bottom tab bar",
+      "Sticky headers over scrolling content",
+      "Bottom-sheet handles and headers",
+      "Floating Action Buttons"
+    ],
+    "dont's": [
+      "Form fields",
+      "Body text regions",
+      "List rows"
+    ]
+  },
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-glass-effect",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceSecondary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "screens": [
+    {
+      "name": "Auth / Role Select",
+      "purpose": "Phone OTP Sign In and role branching (Customer vs Employee).",
+      "states": {
+        "loading": "Spinner over full-screen tinted brand background.",
+        "empty": "N/A",
+        "error": "Standard alert or inline red text below input."
+      },
+      "layout": "Full screen stack. Large RYPPL logo/typography on top. Phone input field. Large primary CTA sticky at bottom keyboard view."
+    },
+    {
+      "name": "Customer - Home",
+      "purpose": "Discover snacks and groceries to order.",
+      "states": {
+        "loading": "Skeleton grid with shimmering cards.",
+        "empty": "Illustration of empty shelves if no items available.",
+        "error": "Error illustration + Retry button."
+      },
+      "layout": "Search bar top (glass header). Hero featured carousel. Horizontal scrolling pill row for 10 categories (Drinks, Energy, etc.). 2-column product grid with 'space-between' and md gap. Floating bottom summary bar if cart has items."
+    },
+    {
+      "name": "Customer - Product Detail",
+      "purpose": "View item details and add to cart.",
+      "states": {
+        "loading": "Skeleton of image and text.",
+        "empty": "N/A",
+        "error": "Error loading product details."
+      },
+      "layout": "Hero image half-screen with vertical gradient scrim at bottom. Title, price, rating in large typography. Segmented controls for sizes. Sticky yellow 'Add to Cart' button at bottom safe area."
+    },
+    {
+      "name": "Customer - Cart & Checkout",
+      "purpose": "Review items, add tips, apply promos, and pay.",
+      "states": {
+        "loading": "Spinner during checkout process.",
+        "empty": "Empty grocery bag illustration + 'Start Shopping' CTA.",
+        "error": "Payment failed state."
+      },
+      "layout": "List of cart item rows with inline quantity steppers (+/-). Promo code input cell. Tip selector implemented as a row of selectable pills ($1, $2, $5, Custom). Sticky 'Checkout' CTA at the bottom."
+    },
+    {
+      "name": "Customer - Order Tracking",
+      "purpose": "Real-time timeline of order fulfillment.",
+      "states": {
+        "loading": "Loading state machine.",
+        "empty": "No active orders.",
+        "error": "Could not fetch status."
+      },
+      "layout": "Vertical timeline UI with state machine badges (incoming, claimed, packing, etc.). Active state highlighted in brandPrimary. Map snippet showing campus delivery destination."
+    },
+    {
+      "name": "Employee - Order Queue",
+      "purpose": "Packers and Runners claim incoming orders.",
+      "states": {
+        "loading": "Loading queue.",
+        "empty": "Empty list illustration (e.g., chill mascot) - 'No orders yet.'",
+        "error": "Network retry state."
+      },
+      "layout": "Top segmented control (Packer | Runner). Vertical list of robust order cards (Order ID, time elapsed, item count). Each card has a prominent 'Claim' button."
+    },
+    {
+      "name": "Employee - Live Campus Map",
+      "purpose": "Runners view map of active deliveries.",
+      "states": {
+        "loading": "Loading map tiles.",
+        "empty": "No active pins.",
+        "error": "Location permission error."
+      },
+      "layout": "Full-bleed map. Map pins colored by status: Green (unpacked), Red (packed), Blue (runner's own order). Tapping a pin summons a Gorhom bottom sheet with order details and 'Start Delivery' CTA."
+    },
+    {
+      "name": "Employee - Active Delivery",
+      "purpose": "Manage the current claimed delivery.",
+      "states": {
+        "loading": "Fetching delivery route.",
+        "empty": "N/A",
+        "error": "Failed to update status."
+      },
+      "layout": "Large delivery address text. Contact customer (SMS) button. Large swipe-to-complete or tap-and-hold 'Mark Complete' CTA to prevent accidental taps."
+    }
+  ],
+  "images": {
+    "hero_featured": {
+      "url": "https://images.pexels.com/photos/11251717/pexels-photo-11251717.jpeg",
+      "alt": "Energy drinks and snacks featured background"
+    },
+    "empty_cart": {
+      "url": "https://images.unsplash.com/photo-1616429368325-d5d7542b0ec3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNzl8MHwxfHNlYXJjaHwyfHxlbXB0eSUyMGdyb2NlcnklMjBiYWclMjBpbGx1c3RyYXRpb258ZW58MHx8fHwxNzgzNTQwMDIwfDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Empty paper grocery bag"
+    },
+    "category_candy": {
+      "url": "https://images.pexels.com/photos/5469039/pexels-photo-5469039.jpeg",
+      "alt": "Assorted colorful candy and sweets"
+    },
+    "delivery_runner": {
+      "url": "https://images.unsplash.com/photo-1767114648562-399d88d7362d",
+      "alt": "Delivery runner with scooter on campus"
+    },
+    "map_pin_placeholder": {
+      "url": "https://images.unsplash.com/photo-1694928850410-b209896782a2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHwxfHxjYW1wdXMlMjBtYXAlMjBkZWxpdmVyeXxlbnwwfHx8fDE3ODM1NDAwMTl8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Google Maps pin on paper"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Implement a Tactile/Playful (Personality 4) aesthetic: Use chunky cards, pill-shaped buttons, and slightly oversized tap targets.",
+    "The app serves two roles: Customer and Employee. Use role-based routing at the root to render distinct bottom tab navigators for each.",
+    "Colors: Use the defined Dark Blue (#0A2342) and Vibrant Yellow (#FFD600) heavily. Primary CTAs should be Yellow with Dark Blue text.",
+    "Map Status Pins (Employee Side): STRICTLY follow the brief's mapping -> success (Green) = unpacked, error (Red) = packed, info (Blue) = runner's own order. Since 'blue' was explicitly typed in the brief, it is permitted here.",
+    "Apply Glassmorphism to the bottom tab bar and sticky headers using expo-blur.",
+    "Customer Cart: Implement the tip selector as a horizontal row of pill-shaped chips, not a dropdown.",
+    "Every screen must have Loading, Empty, and Error states built-in using flex: 1 for full screen coverage.",
+    "Ensure the sticky bottom CTA on scrollable screens (like Checkout and Product Details) rests above a safe-area view and doesn't obscure the content list.",
+    "Use Phosphor icons consistently across all screens with a filled/outlined distinction for active/inactive tabs.",
+    "For the Timeline order tracker, use a vertical line with colored nodes indicating the state machine steps (incoming, claimed_packer, packing, ready, claimed_runner, in_bag, on_road, complete).",
+    "No emojis allowed in any UI elements."
+  ]
+}
